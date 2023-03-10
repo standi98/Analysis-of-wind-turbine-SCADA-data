@@ -42,12 +42,6 @@ def setZeroToNull(file: ps.DataFrame) -> ps.DataFrame:
     return file.replace(0, ps.NA, method='ffill')
 
 
-def loadFile(importFile: str):
-    importedData = ps.read_csv(importFile, delimiter=";", index_col="TimeStamp", parse_dates=['TimeStamp'])
-    importedData = setZeroToNull(importedData)
-    return importedData
-
-
 def checkForErrorcode(timeLine: ps.DataFrame, errorCode: int) -> ps.DataFrame:
     timeLine[timeLine != errorCode] = 0
     timeLine = timeLine.replace(errorCode, 1)
