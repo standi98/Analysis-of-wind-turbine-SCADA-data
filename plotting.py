@@ -3,10 +3,11 @@ import matplotlib.pyplot as plt
 
 
 
-def plotDataSet(dataSet: ps.DataFrame, sameGraph = True):
+def plotDataSet(dataSet: ps.DataFrame, sameGraph = True, plotLegend=False):
     if sameGraph:
         dataSet.plot()
 
+    plt.legend().set_visible(plotLegend)
     plt.show()
         
 

@@ -1,21 +1,24 @@
 import os as os
 import pandas as ps
 import matplotlib.pyplot as plt
-
-
 import utils as utils
+import FileUtils as FU
 import plotting
 
 ########  File setup #########
 #dataFilePath = "ErrorData.csv"
-dataFilePath = "exporteddata_55c0f779-d650-45bf-8583-dd490351b69c.csv"
+dataFilePath = "job_8DB21580215AF1E_archive_0_file_0.csv"
+dataFolderPath = "UnjoinedDataFiles"
 checkCode = 6040
 
 
 
 
-
+dataFilePath = "Datafiles/" + dataFilePath
 ########  Main  #############
 
 
-dataSet = utils.loadFile(dataFilePath)
+dataSet = FU.concatenateFilesFromFolder(dataFolderPath)
+#dataSet = FU.loadFile(dataFilePath)
+print(dataSet)
+plotting.plotDataSet(dataSet)
