@@ -20,5 +20,5 @@ dataFilePath = "Datafiles/" + dataFilePath
 
 dataSet = FU.concatenateFilesFromFolder(dataFolderPath)
 #dataSet = FU.loadFile(dataFilePath)
-print(dataSet)
-plotting.plotDataSet(dataSet)
+print(dataSet.head())
+plotting.plotTimeline(dataSet)

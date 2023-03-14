@@ -27,4 +27,7 @@ def concatenateFilesFromFolder(fileFolderPath: str) -> ps.DataFrame:
     totalFrame = totalFrame.set_index(totalFrame.columns[0])
 
     
+    #Fix the names of the columns
+    totalFrame = totalFrame.rename(columns=lambda x: x.split()[0].replace('-', ''))
+
     return totalFrame

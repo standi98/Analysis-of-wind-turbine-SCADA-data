@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 
 
-def plotDataSet(dataSet: ps.DataFrame, sameGraph = True, plotLegend=False):
+def plotTimeline(dataSet: ps.DataFrame, sameGraph = True, plotLegend=False):
     if sameGraph:
         dataSet.plot()
 
