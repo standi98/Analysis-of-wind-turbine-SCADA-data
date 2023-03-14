@@ -1,5 +1,5 @@
 import os as os
-import pandas as ps
+import pandas as pd
 import matplotlib.pyplot as plt
 import utils as utils
 import FileUtils as FU
@@ -21,4 +21,5 @@ dataFilePath = "Datafiles/" + dataFilePath
 dataSet = FU.concatenateFilesFromFolder(dataFolderPath)
 #dataSet = FU.loadFile(dataFilePath)
 print(dataSet.head())
-plotting.plotTimeline(dataSet)
+#plotting.plotTimeline(dataSet)
+plotting.plotMultipleHistograms(dataSet.iloc[:, :5])
