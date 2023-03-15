@@ -47,3 +47,10 @@ def checkForErrorcode(timeLine: pd.DataFrame, errorCode: int) -> pd.DataFrame:
     timeLine = timeLine.replace(errorCode, 1)
     return timeLine
     
+def fixNames(dataSet: pd.DataFrame) -> pd.DataFrame:
+    #Split out the correct name
+    dataSet = dataSet.rename(columns=lambda x: x.split()[0])
+
+    #Remove the wind park and format name in a more readable way
+    dataSet = dataSet.rename(columns=lambda x: ''.join([x.split("-")[1], "-", x.split("-")[2]]))
+    return dataSet
