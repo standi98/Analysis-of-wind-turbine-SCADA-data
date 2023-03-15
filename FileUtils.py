@@ -26,8 +26,4 @@ def concatenateFilesFromFolder(fileFolderPath: str) -> pd.DataFrame:
     totalFrame.iloc[:, 0] = pd.to_datetime(totalFrame.iloc[:, 0])
     totalFrame = totalFrame.set_index(totalFrame.columns[0])
 
-    
-    #Fix the names of the columns
-    totalFrame = totalFrame.rename(columns=lambda x: x.split()[0].replace('-', ''))
-
     return totalFrame
