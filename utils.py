@@ -1,4 +1,4 @@
-import pandas as ps
+import pandas as pd
 
 
 def YNChoice(question: str) -> bool:
@@ -13,11 +13,11 @@ def YNChoice(question: str) -> bool:
         print("Invalid input! Try again. \n")
 
 
-def emptyTest(testFile: ps.DataFrame) -> bool:
+def emptyTest(testFile: pd.DataFrame) -> bool:
     return testFile.isnull().sum().isnull().sum()
 
 
-def interpolateData(file: ps.DataFrame) -> ps.DataFrame:
+def interpolateData(file: pd.DataFrame) -> pd.DataFrame:
     while (not emptyTest(file)):
         errorFrame = file.isnull().sum()
         print("The different timelines contain this many null values:")
@@ -35,15 +35,22 @@ def interpolateData(file: ps.DataFrame) -> ps.DataFrame:
     return file
 
 
-def setNullToZero(file: ps.DataFrame) -> ps.DataFrame:
+def setNullToZero(file: pd.DataFrame) -> pd.DataFrame:
     return file.fillna(0)
 
-def setZeroToNull(file: ps.DataFrame) -> ps.DataFrame:
-    return file.replace(0, ps.NA, method='ffill')
+def setZeroToNull(file: pd.DataFrame) -> pd.DataFrame:
+    return file.replace(0, pd.NA, method='ffill')
 
 
-def checkForErrorcode(timeLine: ps.DataFrame, errorCode: int) -> ps.DataFrame:
+def checkForErrorcode(timeLine: pd.DataFrame, errorCode: int) -> pd.DataFrame:
     timeLine[timeLine != errorCode] = 0
     timeLine = timeLine.replace(errorCode, 1)
     return timeLine
     
+def fixNames(dataSet: pd.DataFrame) -> pd.DataFrame:
+    #Split out the correct name
+    dataSet = dataSet.rename(columns=lambda x: x.split()[0])
+
+    #Remove the wind park and format name in a more readable way
+    dataSet = dataSet.rename(columns=lambda x: ''.join([x.split("-")[1], "-", x.split("-")[2]]))
+    return dataSet
