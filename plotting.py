@@ -5,22 +5,20 @@ import math as math
 
 #Plot visualising stuff
 from cycler import cycler
-
-plt.rcParams['xtick.labelsize'] = 12
-plt.rcParams['ytick.labelsize'] = 12
-plt.rcParams["axes.labelsize"]= 12
-plt.rcParams["figure.facecolor"] = "#f2f2f2"
-#plt.rcParams['figure.savefig.dpi'] = 100
-plt.rcParams['savefig.edgecolor'] = "#f2f2f2"
-plt.rcParams['savefig.facecolor'] ="#f2f2f2"
-plt.rcParams["figure.figsize"] = [16,10]
-plt.rcParams['savefig.bbox'] = "tight"
-plt.rcParams['font.size'] = 14
-greens = ['#66c2a4','#41ae76','#238b45','#006d2c','#00441b']
-multi =['#66c2a4','#1f78b4','#a6cee3','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f']
-plt.rcParams["axes.prop_cycle"] = cycler(color=multi)
-
-
+if True:
+    plt.rcParams['xtick.labelsize'] = 12
+    plt.rcParams['ytick.labelsize'] = 12
+    plt.rcParams["axes.labelsize"]= 12
+    plt.rcParams["figure.facecolor"] = "#f2f2f2"
+    #plt.rcParams['figure.savefig.dpi'] = 100
+    plt.rcParams['savefig.edgecolor'] = "#f2f2f2"
+    plt.rcParams['savefig.facecolor'] ="#f2f2f2"
+    plt.rcParams["figure.figsize"] = [16,10]
+    plt.rcParams['savefig.bbox'] = "tight"
+    plt.rcParams['font.size'] = 14
+    greens = ['#66c2a4','#41ae76','#238b45','#006d2c','#00441b']
+    multi =['#66c2a4','#1f78b4','#a6cee3','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f']
+    plt.rcParams["axes.prop_cycle"] = cycler(color=multi)
 
 
 
@@ -48,9 +46,6 @@ def plotMultipleHistograms(dataSet: pd.DataFrame, bins=None):
 
     neededRows = int(math.ceil(math.sqrt(numCols)))
     neededCols = int(math.ceil(numCols / neededRows))
-     
-    
-
 
     #Calculate Bins if neccesary
     if not bins:
@@ -65,5 +60,18 @@ def plotMultipleHistograms(dataSet: pd.DataFrame, bins=None):
     fig.suptitle('Histograms')
     plt.xlabel('Values')
     plt.ylabel('Frequency')
+    plt.subplots_adjust(left=0.1,
+                    bottom=0.1,
+                    right=0.9,
+                    top=0.85,
+                    wspace=0.4,
+                    hspace=0.6)
 
     plt.show(block = True)
+
+
+def plotHistogramsAgainstEachother(dataSet1: pd.DataFrame, dataSet2: pd.DataFrame):
+    #Condatenate the dataSets
+    concatenatedDataSet = pd.concat(dataSet1, dataSet1, axis=1)
+    interchangedDataSet = concatenatedDataSet.iloc[:, ::2]
+    plotMultipleHistograms(interchangedDataSet)
