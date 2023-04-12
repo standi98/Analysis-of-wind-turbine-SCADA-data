@@ -22,6 +22,8 @@ dataFilePath = "Datafiles/" + dataFilePath
 
 ########  Main  #############
 
+removelist = ["ErrorCode"]
+
 # dataSet1 = FU.concatenateFilesFromFolder(Turbine1Folder)
 # dataSet1 = utils.setZeroToNull(dataSet1)
 # dataSet1.dropna(axis=1, how='all')

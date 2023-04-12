@@ -1,4 +1,5 @@
 import pandas as pd
+from typing import List
 
 
 def YNChoice(question: str) -> bool:
@@ -48,9 +49,29 @@ def checkForErrorcode(timeLine: pd.DataFrame, errorCode: int) -> pd.DataFrame:
     return timeLine
     
 def fixNames(dataSet: pd.DataFrame) -> pd.DataFrame:
+    
     #Split out the correct name
     dataSet = dataSet.rename(columns=lambda x: x.split()[0])
 
     #Remove the wind park and format name in a more readable way
     dataSet = dataSet.rename(columns=lambda x: ''.join([x.split("-")[1], "-", x.split("-")[2]]))
     return dataSet
+
+
+def removeTimelines(dataSet : pd.DataFrame, stringsToRemove: List[str]) -> pd.DataFrame:
+    """
+    This function removes columns from a pandas dataframe that contain any of the specified strings.
+    
+    Parameters:
+    dataSet (pandas.DataFrame): the pandas dataframe
+    stringsToRemove (list): a list of strings to remove from the column labels
+    
+    Returns:
+    pandas.DataFrame: a new dataframe with the specified columns removed
+    """
+
+    # Create a regular expression to match column labels containing any of the specified strings
+    regexPattern = '|'.join(stringsToRemove)
+    
+    # Use filter method to remove columns
+    dataSet = dataSet.filter(regex=f"^(?!.*({regexPattern})).*")
