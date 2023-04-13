@@ -48,6 +48,16 @@ def checkForErrorcode(timeLine: pd.DataFrame, errorCode: int) -> pd.DataFrame:
     return timeLine
     
 def fixNames(dataSet: pd.DataFrame) -> pd.DataFrame:
+    """
+    This function fikses the names of the downloaded columns
+
+    Prameters:
+    dataSet (pd.DataFrame): The dataFrame to fix the columns names of
+
+    Returns:
+    pd.DataFrame: The fixed dataFrame
+    """
+
     #Split out the correct name
     dataSet = dataSet.rename(columns=lambda x: x.split()[0])
 
