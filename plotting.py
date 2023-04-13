@@ -21,8 +21,16 @@ if True:
     plt.rcParams["axes.prop_cycle"] = cycler(color=multi)
 
 
-
 def plotTimeline(dataSet: pd.DataFrame, sameGraph = True, plotLegend=False):
+    """
+    This function plots timelines from a pandas dataframe.
+    
+    Parameters:
+    dataSet (pandas.DataFrame): the pandas dataframe to plot
+    sameGraph (bool): Selects if the timelines should be plotted seperatly or in the same window
+    plotLegend (bool): Selects if the legend should be shown, not recomended for large amounts of timelines
+    """
+
     if sameGraph:
         dataSet.plot()
 
@@ -31,6 +39,12 @@ def plotTimeline(dataSet: pd.DataFrame, sameGraph = True, plotLegend=False):
         
 
 def plotScatter(dataSet: pd.DataFrame):
+    """
+    This function plots a scatter plot of all columns in the dataset
+
+    Parameters:
+    dataSet (pandas.DataFrame): The datframe to plot. 
+    """
     column_names = dataSet.columns
 
     for col in column_names:
@@ -40,6 +54,9 @@ def plotScatter(dataSet: pd.DataFrame):
 
 
 def plotMultipleHistograms(dataSet: pd.DataFrame, bins=None):
+    """
+    This function plots multiple histograms in different 
+    """
     
     #Calculate the size of the histogram
     numCols = len(dataSet.columns)

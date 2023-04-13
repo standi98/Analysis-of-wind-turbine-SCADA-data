@@ -3,13 +3,33 @@ import utils
 import pandas as pd
 
 
-def loadFile(importFile: str):
+def loadFile(importFile: str) -> pd.DataFrame:
+    """
+    This function loads a .csv file
+
+    Parameters:
+    importFile (str): the file path
+    
+    Returns:
+    pandas.DataFrame: the loaded dataframe
+    """
     importedData = pd.read_csv(importFile, delimiter=";",skiprows=1, index_col="Timestamp", parse_dates=['Timestamp'])
-    importedData = utils.setZeroToNull(importedData)
     return importedData
 
 
 def concatenateFilesFromFolder(fileFolderPath: str) -> pd.DataFrame:
+    """
+    This function concatenates all of the .csv files in a folder.
+    They are concatenated in the same order they are listed in, and they are added underneath eachother
+    
+    Parameters:
+    fileFolderPath (str): the folder path
+    
+    Returns:
+    pandas.DataFrame: the concatenaded dataframe
+    """
+
+
     dataFrameList = []
     
     #Create a list of all the files
