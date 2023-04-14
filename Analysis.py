@@ -4,8 +4,20 @@ import matplotlib.pyplot as plt
 from typing import List
 import mplcursors
 
-def findCosineSimilarity(dataSet1: pd.DataFrame, dataSet2: pd.DataFrame):
-    
+def findCosineSimilarity(dataSet1: pd.DataFrame, dataSet2: pd.DataFrame) -> pd.DataFrame:
+    """
+    This function takes in dataFrames with timelines from two turbines, and returns a dataframe with cosine similarities between the timelines.
+    It returns a dataframe with the two first columns as names of the timeseries, and the third column as the similarity of the two.
+
+    Prarameters:
+    dataSet1 (pd.DataFrame): The first dataFrame
+    dataSet2 (pd.DataFrame): The second dataFrame
+
+    Returns:
+    pd.DataFrame: The resulting similarities in a new dataFrame
+    """
+
+
     #Find column names
     colNames1 = [name for name in dataSet1.columns]
     colNames2 = [name for name in dataSet2.columns]
@@ -20,7 +32,7 @@ def findCosineSimilarity(dataSet1: pd.DataFrame, dataSet2: pd.DataFrame):
         simRow = pd.DataFrame({'Turbine 1': col1, 'Turbine 2': col2, 'Similarity': sim}, index=[0])
         simDataFrame = pd.concat([simDataFrame, simRow], ignore_index=True)
 
-    print(simDataFrame.head())
+    return simDataFrame
 
 
 def plotCoeficientSideBySide(dataSets: List[pd.DataFrame] = 0):
