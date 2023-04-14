@@ -55,7 +55,12 @@ def plotScatter(dataSet: pd.DataFrame):
 
 def plotMultipleHistograms(dataSet: pd.DataFrame, bins=None):
     """
-    This function plots multiple histograms in different 
+    This function plots multiple histograms in different windows. 
+    It takes a dataframe and plots one histogram for each of the columns in the dataframe,
+    with the individual values in each column separated in predetermined or calculated bins
+
+    Parameters:
+    dataSet (pandas.DataFrame): The datframe to plot.
     """
     
     #Calculate the size of the histogram
@@ -88,7 +93,15 @@ def plotMultipleHistograms(dataSet: pd.DataFrame, bins=None):
 
 
 def plotHistogramsAgainstEachother(dataSet1: pd.DataFrame, dataSet2: pd.DataFrame):
+    """
+    This function takes two corresponding dataframes and plots each column next to eachither using plotMultipleHistogram()
+
+    Parameters:
+    dataSet1 (pandas.DataFrame): The first datframe to plot.
+    dataSet2 (pandas.DataFrame): The second datframe to plot.
+    """
+    
     #Condatenate the dataSets
-    concatenatedDataSet = pd.concat(dataSet1, dataSet1, axis=1)
+    concatenatedDataSet = pd.concat(dataSet1, dataSet2, axis=1)
     interchangedDataSet = concatenatedDataSet.iloc[:, ::2]
     plotMultipleHistograms(interchangedDataSet)

@@ -29,3 +29,7 @@ dataSet = utils.fixNames(dataSet)
 print(dataSet.head())
 #plotting.plotTimeline(dataSet)
 plotting.plotMultipleHistograms(dataSet.iloc[:, :5])
+
+
+
+plotting.plotHistogramsAgainstEachother()

@@ -2,6 +2,9 @@ import pandas as pd
 
 
 def YNChoice(question: str) -> bool:
+    """
+    Simple yes or no question function
+    """
     while(True):
         choice = input(question + " [Y/N] ")
         if choice in ["Y", "N"]:
@@ -14,10 +17,28 @@ def YNChoice(question: str) -> bool:
 
 
 def emptyTest(testFile: pd.DataFrame) -> bool:
-    return testFile.isnull().sum().isnull().sum()
+    """
+    This function checks if there are any empty entries in the dataFrame.
+    
+    Parameters:
+    testFile (pandas.DataFrame): The datframe to check.
+
+    Returns:
+    bool: Returns true if there are empty cells and false if not
+    """
+    return bool(testFile.isnull().sum().isnull().sum())
 
 
 def interpolateData(file: pd.DataFrame) -> pd.DataFrame:
+    """
+    This function interpolates the data in the dataFrame.
+
+    Parameters:
+    dataSet1 (pandas.DataFrame): The datframe to interpolate.
+
+    Returns:
+    pandas.DataFrame: The interpolated dataframe
+    """
     while (not emptyTest(file)):
         errorFrame = file.isnull().sum()
         print("The different timelines contain this many null values:")
@@ -38,15 +59,27 @@ def interpolateData(file: pd.DataFrame) -> pd.DataFrame:
 def setNullToZero(file: pd.DataFrame) -> pd.DataFrame:
     return file.fillna(0)
 
+
 def setZeroToNull(file: pd.DataFrame) -> pd.DataFrame:
     return file.replace(0, pd.NA, method='ffill')
 
 
 def checkForErrorcode(timeLine: pd.DataFrame, errorCode: int) -> pd.DataFrame:
+    """
+    This function takes a timeline of the error codes in a turbine and replaces all of the other codes with zero, and the one searched for with 1.
+
+    Parameters:
+    dataSet (pd.DataFrame): The timeline to search for codes in
+    errorCode (int): The code to search for
+
+    Returns:
+    pd.DataFrame: The resulting timeline.
+    """
     timeLine[timeLine != errorCode] = 0
     timeLine = timeLine.replace(errorCode, 1)
     return timeLine
-    
+
+
 def fixNames(dataSet: pd.DataFrame) -> pd.DataFrame:
     """
     This function fikses the names of the downloaded columns
